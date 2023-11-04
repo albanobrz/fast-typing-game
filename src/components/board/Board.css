@@ -1,0 +1,16 @@
+.caixa-texto {
+    border: 1px solid #077a50;
+    padding: 10px;
+    margin: 10px;
+    background-color: #f7f7f7;
+    height: 130px;
+    width: 800px;
+    border-radius: 3px;
+}
+
+.wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}

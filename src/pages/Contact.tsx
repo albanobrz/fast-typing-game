@@ -1,4 +1,4 @@
-import Header from './../components/Header'
+import Header from '../components/header/Header'
 
 function Contact() {
 
@@ -6,6 +6,9 @@ function Contact() {
     <div className="App">
         <Header />
         Contact Page
+
+        email: catapimbas@gmail.com
+        linkedin: jalin habey
     </div>
   );
 }

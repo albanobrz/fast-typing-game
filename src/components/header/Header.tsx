@@ -12,14 +12,16 @@ import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import KeyboardIcon from '@mui/icons-material/Keyboard';
+import { Link, useNavigate } from 'react-router-dom';
 
-const pages = ['Play', 'Contact'];
+const pages = ['play', 'contact'];
 const settings = ['Profile', 'Account', 'Logout'];
 
 function Header() {
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(null);
   const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(null);
-  const [buttonValue, setButtonValue] = React.useState('');
+  const [buttonValue, setButtonValue] = React.useState('/');
+  const navigate = useNavigate();
 
   const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorElNav(event.currentTarget);
@@ -35,6 +37,19 @@ function Header() {
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
   };
+
+  React.useEffect(() => {
+    switch (buttonValue) {
+      case "contact":
+        navigate('/contact')
+        break;
+      case "play":
+        navigate('/')
+        break;
+      default:
+        break;
+    }
+  }, [buttonValue]);
 
   return (
     <AppBar position="static">
