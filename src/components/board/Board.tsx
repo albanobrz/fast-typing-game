@@ -1,13 +1,40 @@
-import React from 'react';
-import { Box } from '@mui/material';
 import './Board.css'
+import Input from '../input/Input'
+import Stack from '@mui/material/Stack';
+
 
 const Board = () => {
     return (
         <div className='wrapper'>
-            <div className="caixa-texto">
-                Teste
-            </div>
+            <Stack>
+                <div className="textbox">
+                    <div className="words">
+                        <span>palavra</span>
+                        <span>palavra</span>
+                        <span>palavra</span>
+                        <span>palavra</span>
+                        <span>palavra</span>
+                        <span>palavra</span>
+                        <span>palavra</span>
+                        <span>palavra</span>
+                        <span>palavra</span>
+                        <span>palavra</span>
+                        <span>teste</span>
+                        <span>palavra</span>
+                        <span>palavra</span>
+                        <span>palavra</span>
+                        <span>palavra</span>
+                        <span>palavra</span>
+                        <span>palavra</span>
+                        <span>palavra</span>
+                        <span>palavra</span>
+                        <span>palavra</span>
+                        <span>palavra</span>
+                        <span>palavra</span>
+                    </div>
+                </div>
+                <Input />
+            </Stack>
         </div>
     );
 }

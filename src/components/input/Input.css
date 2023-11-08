@@ -1,0 +1,17 @@
+.inputWrapper {
+    background-color: rgba(7, 122, 80, 0.3);
+    height: 60px;
+    width: 900px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+    padding: 0;
+}
+
+.customBox {
+    background-color: rgba(7, 122, 80, 0.3);
+    height: 60px;
+    width: 932px;
+    margin: 10px;
+}
