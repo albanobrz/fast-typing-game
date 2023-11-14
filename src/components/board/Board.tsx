@@ -1,5 +1,5 @@
 import './Board.css'
-import Input from '../input/Input'
+import InputGame from '../input/Input'
 import Stack from '@mui/material/Stack';
 
 
@@ -33,7 +33,7 @@ const Board = () => {
                         <span>palavra</span>
                     </div>
                 </div>
-                <Input />
+                <InputGame />
             </Stack>
         </div>
     );
