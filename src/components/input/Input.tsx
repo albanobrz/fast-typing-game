@@ -3,7 +3,12 @@ import './Input.css'
 import React, { ChangeEvent, useEffect, useState } from 'react';
 import ReplayIcon from '@mui/icons-material/Replay';
 
-const InputGame = () => {
+interface InputProps {
+    onInputChange: (value: string) => void;
+    listOfWords: any;
+  }
+
+const InputGame: React.FC<InputProps> = ({listOfWords, onInputChange}) => {
     const squareButtonStyle = {
         borderRadius: 0,
         padding: '8px 16px'
@@ -22,6 +27,8 @@ const InputGame = () => {
     const [inputValue, setInputValue] = useState('');
     const [timePassed, setTimePassed] = useState(60);
     const [activeTime, setActiveTime] = useState(false);
+    const [words, setWords] = useState(listOfWords);
+    const [typedWord, setTypedWord] = useState('');
 
     useEffect(() => {
         let interval: string | number | NodeJS.Timeout | undefined;
@@ -46,6 +53,7 @@ const InputGame = () => {
 
     const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
         const textoDigitado = e.target.value;
+        handleChange(e)
 
         setInputValue(textoDigitado);
 
@@ -61,10 +69,15 @@ const InputGame = () => {
     }
 
     const formatTime = (time: number) => {
-        const min = Math.floor(time/60) 
+        const min = Math.floor(time / 60)
         const sec = time % 60
         return `${min}:${sec < 10 ? '0' : ''}${sec}`
     }
+
+    const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        const typedValue = event.target.value;
+        onInputChange(typedValue);
+    };
 
     return (
         <Box className='customBox'>
