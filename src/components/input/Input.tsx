@@ -1,15 +1,7 @@
-import { Box, Button, Checkbox, Grid, Typography } from '@mui/material';
+import { Box, Button, Checkbox, Grid, TextField, Typography } from '@mui/material';
 import './Input.css'
-import { CheckBox } from '@mui/icons-material';
-import { TextareaAutosize } from '@mui/base/TextareaAutosize';
-import React, { useState } from 'react';
-import Input from '@mui/material/Input';
-import TextField from './textfield/TextField'
+import React, { ChangeEvent, useEffect, useState } from 'react';
 import ReplayIcon from '@mui/icons-material/Replay';
-
-const textValue = "salve"
-
-
 
 const InputGame = () => {
     const squareButtonStyle = {
@@ -18,27 +10,82 @@ const InputGame = () => {
     };
 
     const boxStyle = {
-        background: '#f0f0f0', 
-        padding: '16px', 
-        borderRadius: '8px', 
-        width: '50%', // Largura total do pai
+        background: '#f0f0f0',
+        padding: '8px',
+        borderRadius: '8px',
+        width: '100px',
+        height: '30px',
+        fontSize: '8px',
+        margin: 0
     };
+
+    const [inputValue, setInputValue] = useState('');
+    const [timePassed, setTimePassed] = useState(60);
+    const [activeTime, setActiveTime] = useState(false);
+
+    useEffect(() => {
+        let interval: string | number | NodeJS.Timeout | undefined;
+
+        if (activeTime) {
+            interval = setInterval(() => {
+                setTimePassed((tempoAtual) => {
+                    if (tempoAtual > 0) {
+                        return tempoAtual - 1;
+                    } else {
+                        setActiveTime(false);
+                        return 0;
+                    }
+                });
+            }, 1000);
+        } else {
+            clearInterval(interval);
+        }
+
+        return () => clearInterval(interval);
+    }, [activeTime]);
+
+    const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
+        const textoDigitado = e.target.value;
+
+        setInputValue(textoDigitado);
+
+        if (!activeTime && textoDigitado.trim() !== '') {
+            setActiveTime(true);
+        }
+    };
+
+    const handleInputReset = () => {
+        setActiveTime(false)
+        setTimePassed(60)
+        setInputValue('')
+    }
+
+    const formatTime = (time: number) => {
+        const min = Math.floor(time/60) 
+        const sec = time % 60
+        return `${min}:${sec < 10 ? '0' : ''}${sec}`
+    }
 
     return (
         <Box className='customBox'>
             <Grid container spacing={3}>
                 <Grid item xs>
-                    <TextField />
+                    <TextField
+                        label="type"
+                        value={inputValue}
+                        onChange={handleInputChange}
+                        style={{ background: "white", borderRadius: 4 }}
+                    />
                 </Grid>
                 <Grid item xs={3}>
-                    <Button variant="contained" style={squareButtonStyle}>
+                    <Button variant="contained" style={squareButtonStyle} onClick={handleInputReset}>
                         <ReplayIcon />
                     </Button>
                 </Grid>
                 <Grid item xs>
-                <Box style={boxStyle}>
-                    <Typography variant="h4">Tempo: 10 segundos</Typography>
-                </Box>
+                    <Box style={boxStyle}>
+                        <Typography variant="h4">{formatTime(timePassed)}</Typography>
+                    </Box>
                 </Grid>
             </Grid>
         </Box>
